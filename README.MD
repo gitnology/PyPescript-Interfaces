@@ -31,7 +31,7 @@ print(ych.example_str) # blah
 
 ```
 
-#To fail if provided unknown values:
+To fail if provided unknown values:
 
 ```python
 class YourClassHere(Interface):
