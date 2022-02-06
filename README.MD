@@ -19,7 +19,7 @@ Mismatching types will flag errors.
 import Interface
 
 class YourClassHere(Interface):
-	example_str: str
+    example_str: str
     example_list:List
     example_optional: Optional[str]
     
