@@ -2,7 +2,7 @@ from typing import List, Dict, Optional
 
 import pytest
 
-from libs.es_interface_lib.es_interface import Interface
+from interfaces import Interface
 
 class VideoObject(Interface):
     name: str
@@ -62,6 +62,13 @@ class TestObject:
         example_dict = {"name": "bob", "age": 10,"the_list": ["1","2","3"],"the_test":"blah", "the_dict":{1:"a",2:"b"}}
         v = VideoObject(**example_dict, unknown_allowed=False)
         assert v.to_dict() == {'name': 'bob', 'age': 10, 'the_list': ['1', '2', '3'], 'the_test': 'blah', 'the_dict': {'1': 'a', '2': 'b'}}
+
+    def test_object_to_dict_missing_fields_default_to_none(self):
+        example_dict = {"name": "bob", "age": 10, "the_list": ["1", "2", "3"],
+                        "the_dict": {1: "a", 2: "b"}}
+        v = VideoObject(**example_dict,missing_fields_default_to_none=False)
+        assert v.to_dict() == {'name': 'bob', 'age': 10, 'the_list': ['1', '2', '3'],
+                               'the_dict': {'1': 'a', '2': 'b'}}
 
     def test_object_to_json(self):
         example_dict = {"name": "bob", "age": 10, "the_list": ["1", "2", "3"], "the_test": "blah",

@@ -5,11 +5,11 @@ ES Pypescript Interface lib, for strongly typing objects (like typescript) in py
 usage: 
 
 To use, create a new class and make the shape of the object you want, use the typing library to annotate types, 
-then pass in the expanded dict of it (from a request or whatever)
+then pass in the expanded dict of it (from a request.json() etc)
 
 by default unknown kwargs are ignored, this can be configured by passing in unknown_allowed=False as shown in a later example
 
-Optional fields are also supported and default to None.
+Optional fields are also supported and default to None, use kwarg missing_fields_default_to_none=False to change this behaviour.
 
 Mismatching types will flag errors.
 
@@ -43,9 +43,33 @@ example_dict = {"example_str":"foo"}
 ych = YourClassHere(**example_dict,unknown_allowed=False)
 print(ych.example_str) # blah
 
-
 ``` 
+
+#To stop optional missing fields defaulting to none:
+
 
 	
  
- 
+ ```python
+class YourClassHere(Interface):
+	example_str: str
+    blah: Optional[str]
+    
+
+
+example_dict = {"example_str":"foo"}
+ych = YourClassHere(**example_dict)
+print(ych.to_dict()) # {"example_str":"foo", "blah":None}
+```
+
+
+ ```python
+class YourClassHere(Interface):
+	example_str: str
+    blah: Optional[str]
+    
+
+
+example_dict = {"example_str":"foo"}
+ych = YourClassHere(**example_dict,missing_fields_default_to_none=False)
+print(ych.to_dict()) # {""example_str":"foo"} 

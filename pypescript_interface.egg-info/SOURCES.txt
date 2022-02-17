@@ -1,0 +1,7 @@
+setup.py
+interfaces/__init__.py
+pypescript_interface.egg-info/PKG-INFO
+pypescript_interface.egg-info/SOURCES.txt
+pypescript_interface.egg-info/dependency_links.txt
+pypescript_interface.egg-info/requires.txt
+pypescript_interface.egg-info/top_level.txt
