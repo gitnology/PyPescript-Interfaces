@@ -3,3 +3,7 @@ lib/.DS_Store
 interfaces/.DS_Store
 .idea/vcs.xml
 lib/.DS_Store
+lib/.DS_Store
+dist/pypescript_interface-0.0.3-py3-none-any.whl
+dist/pypescript_interface-0.0.4-py3-none-any.whl
+build/lib/interfaces/__init__.py

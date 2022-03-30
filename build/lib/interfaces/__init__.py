@@ -9,14 +9,15 @@ import typing
 
 class Interface:
 
-    def __init__(self, *args, unknown_allowed: bool = True, **kwargs):
+    def __init__(self, *args, unknown_allowed: bool = True, missing_fields_default_to_none=True,**kwargs):
         #iterate over interface vars and if they are not optional and they are missing from kwargs throw error.
         for interface_var in self.__class__.__annotations__:
             #Checks if field is optional, note this will probably fail if we start using Union fields.. TODO: Fix this later...
             if typing.get_origin(self.__class__.__annotations__[interface_var]) == typing.Union:
                 if interface_var not in kwargs.keys():
-                    logging.info(f"{interface_var} not present in object")
-                    self.__setattr__(interface_var,None)
+                    logging.debug(f"{interface_var} not present in object")
+                    if missing_fields_default_to_none:
+                        self.__setattr__(interface_var,None)
             else:
                 if interface_var not in kwargs.keys():
                     raise TypeError(f"{interface_var} not found in kwargs, make field {interface_var} Optional[] or pass in value when instanciating {self.__class__}.")
@@ -25,7 +26,7 @@ class Interface:
             if k in self.__class__.__annotations__:
                 var_declared_type = self.__class__.__annotations__.get(k)
                 #warn if type mismatch between declared type and kwarg type
-                if not isinstance(var_declared_type,type(kwargs[k])):
+                if var_declared_type != type(kwargs[k]):
                     logging.warning(
                         f"declared type of {var_declared_type} does not match type of {k} from {kwargs[k]}")
                 self.__setattr__(k, kwargs[k])

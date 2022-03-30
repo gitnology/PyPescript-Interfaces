@@ -9,7 +9,7 @@ import typing
 
 class Interface:
 
-    def __init__(self, *args, unknown_allowed: bool = True, missing_fields_default_to_none=True,**kwargs):
+    def __init__(self, *args, unknown_allowed: bool = True, missing_fields_default_to_none=False,**kwargs):
         #iterate over interface vars and if they are not optional and they are missing from kwargs throw error.
         for interface_var in self.__class__.__annotations__:
             #Checks if field is optional, note this will probably fail if we start using Union fields.. TODO: Fix this later...
@@ -27,8 +27,9 @@ class Interface:
                 var_declared_type = self.__class__.__annotations__.get(k)
                 #warn if type mismatch between declared type and kwarg type
                 if var_declared_type != type(kwargs[k]):
-                    logging.warning(
-                        f"declared type of {var_declared_type} does not match type of {k} from {kwargs[k]}")
+                    pass
+                    # logging.warning(
+                    #     f"declared type of {var_declared_type} does not match type of {k} from {kwargs[k]}")
                 self.__setattr__(k, kwargs[k])
             else:
                 #if not unknown_allowed any unknown kwargs raise an exception
