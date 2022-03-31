@@ -15,7 +15,7 @@ class Interface:
             #Checks if field is optional, note this will probably fail if we start using Union fields.. TODO: Fix this later...
             if typing.get_origin(self.__class__.__annotations__[interface_var]) == typing.Union:
                 if interface_var not in kwargs.keys():
-                    logging.debug(f"{interface_var} not present in object")
+                    # logging.debug(f"{interface_var} not present in object")
                     if missing_fields_default_to_none:
                         self.__setattr__(interface_var,None)
             else:
