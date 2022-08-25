@@ -9,10 +9,11 @@ then pass in the expanded dict of it (from a request.json() etc)
 
 by default unknown kwargs are ignored, this can be configured by passing in unknown_allowed=False as shown in a later example
 
-Optional fields are also supported and default to None, use kwarg missing_fields_default_to_none=False to change this behaviour.
+Optional fields are also supported use Optional[int] etc
 
-Mismatching types will flag errors.
+Nesting is supported.
 
+Use kwarg missing_fields_default_to_none=True to do make unspecified fields default to None.
 
 
 ```python
