@@ -14,3 +14,6 @@ pypescript_interface.egg-info/requires.txt
 pypescript_interface.egg-info/SOURCES.txt
 pypescript_interface.egg-info/top_level.txt
 dist/pypescript_interface-0.0.6-py3-none-any.whl
+.idea/misc.xml
+*.iml
+.idea/PypescriptInterfaces.iml

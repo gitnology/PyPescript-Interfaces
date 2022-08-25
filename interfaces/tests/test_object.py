@@ -20,6 +20,9 @@ class VideoObjectNonOptional(Interface):
     the_test: Optional[str]
     more_test: str
 
+class NestedObject(Interface):
+    test: str
+    video_obj: VideoObject
 
 class TestObject:
 
@@ -48,7 +51,7 @@ class TestObject:
     def test_object_optional_fields_default_none(self):
         example_dict = {"name": "bob", "age": 10, "the_list": ["1", "2", "3"],
                         "the_dict": {1: "a", 2: "b"}}
-        v = VideoObject(**example_dict, unknown_allowed=False)
+        v = VideoObject(**example_dict, unknown_allowed=False,missing_fields_default_to_none=True)
         assert v.the_test == None
 
     def test_object_non_optional_fields(self):
@@ -82,5 +85,10 @@ class TestObject:
         v = VideoObject(**example_dict, unknown_allowed=False)
         assert v.to_binary()
 
-
-
+    def test_nested(self):
+        example_dict = {"name": "bob", "age": 10, "the_list": ["1", "2", "3"],
+                        "the_dict": {1: "a", 2: "b"}}
+        top_level_dict = {"test":"string", "video_obj": example_dict}
+        nobj = NestedObject(**top_level_dict)
+        nobj.video_obj.name == 'bob'
+        nobj.test == 'string'
