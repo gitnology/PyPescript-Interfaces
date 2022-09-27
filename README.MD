@@ -20,7 +20,7 @@ Use kwarg missing_fields_default_to_none=True to do make unspecified fields defa
 import Interface
 
 class YourClassHere(Interface):
-	example_str: str
+    example_str: str
     example_list:List
     example_optional: Optional[str]
     
@@ -32,7 +32,7 @@ print(ych.example_str) # blah
 
 ```
 
-#To fail if provided unknown values:
+To fail if provided unknown values:
 
 ```python
 class YourClassHere(Interface):
@@ -51,26 +51,4 @@ print(ych.example_str) # blah
 
 	
  
- ```python
-class YourClassHere(Interface):
-	example_str: str
-    blah: Optional[str]
-    
-
-
-example_dict = {"example_str":"foo"}
-ych = YourClassHere(**example_dict)
-print(ych.to_dict()) # {"example_str":"foo", "blah":None}
-```
-
-
- ```python
-class YourClassHere(Interface):
-	example_str: str
-    blah: Optional[str]
-    
-
-
-example_dict = {"example_str":"foo"}
-ych = YourClassHere(**example_dict,missing_fields_default_to_none=False)
-print(ych.to_dict()) # {""example_str":"foo"} 
+ 
