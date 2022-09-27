@@ -17,3 +17,4 @@ dist/pypescript_interface-0.0.6-py3-none-any.whl
 .idea/misc.xml
 *.iml
 .idea/PypescriptInterfaces.iml
+dist
